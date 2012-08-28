@@ -344,7 +344,7 @@ class ImapSource extends DataSource {
 	protected function _makeOrder($Model, $query) {
 		$criterias = array('date', 'arrival', 'from', 'subject', 'to', 'cc', 'size');
 
-		$order = array(1, SORTDATE);			
+		$order = array(1, SORTDATE);
 		if (empty($query['order']) || empty($query['order'][0])) {
 			return $order;
 		}
@@ -607,7 +607,7 @@ class ImapSource extends DataSource {
 		if (empty($model->id)) {
 			return $this->err($model, 'Cannot update a record without id');
 		}
-		
+
 		$flags = array('recent', 'seen', 'flagged', 'answered', 'draft', 'deleted');
 		$data = array_combine($fields, $values);
 		foreach ($data as $field => $value) {
@@ -846,7 +846,11 @@ class ImapSource extends DataSource {
 			}
 		}
 
-		$Part->is_attachment = (!empty($Part->disposition) && !empty($Part->filename) && in_array($Part->disposition, array('attachment', 'inline')));
+		$Part->is_attachment = (
+			   !empty($Part->disposition)
+			&& !empty($Part->filename)
+			&& in_array(strtolower($Part->disposition), array('attachment', 'inline'))
+		);
 
 		return $Part;
 	}
@@ -985,7 +989,7 @@ class ImapSource extends DataSource {
 				if (empty($Part->parameters)) {
 					return $text;
 				}
-				
+
 				// Try decode using the charset provided
 				foreach ($Part->parameters as $param) {
 					if ($param->attribute !== 'charset') {
