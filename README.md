@@ -1,7 +1,7 @@
 Imap datasource for CakePHP. Ripped from Infinitas. 
 [Changes since then](https://github.com/kvz/cakephp-emails-plugin/compare/10767bee59dd425ced5b97ae9604acf7f3c0d27a...master)
 
-Requires CakePHP 1.3
+Requires CakePHP 2.0
 
 Warning
 ============
@@ -32,10 +32,9 @@ Config
     <?php
     class DATABASE_CONFIG {
         // ... your normal database config here ...
-
         // Imap email connection
         public $emailTicket = array(
-            'datasource' => 'Emails.Imap',
+            'datasource' => 'Emails.ImapSource',
             'server' => 'imap.example.com',
             'connect' => 'imap/tls/novalidate-cert',
             'username' => 'tickets',
